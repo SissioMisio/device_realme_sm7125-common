@@ -63,7 +63,10 @@ function blob_fixup() {
         system_ext/lib64/lib-imsvideocodec.so)
             "${PATCHELF}" --replace-needed libgui.so libxxx.so "${2}"
             ;;
-    esac
+        vendor/lib64/hw/com.qti.chi.override.so)
+ 	grep -q libcamera_metadata_shim.so "${2}" || "${PATCHELF}" --add-needed libcamera_metadata_shim.so "${2}"
+	    ;; 
+   esac
 }
 
 if [ -z "${ONLY_TARGET}" ]; then
